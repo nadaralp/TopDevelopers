@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://nadaradmin:nadaradmin@devconnecter-ielyz.mongodb.net/test?retryWrites=true"
+  "mongoURI": "mongodb+srv://nadaradmin:nadaradmin@devconnecter-ielyz.mongodb.net/test?retryWrites=true",
+  "jwtSECRET": "MYSECRETFORJWTTOKENNADARALP"
 }
