@@ -11,11 +11,11 @@ userSchema = new mongoose.Schema({
     unique: true
   },
   password: {
-    Type: String,
+    type: String,
     required: true
   },
   avatar: {
-    Type: String
+    type: String
   },
   date: {
     type: Date,
