@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://nadaradmin:nadaradmin@devconnecter-ielyz.mongodb.net/test?retryWrites=true",
-  "jwtSECRET": "MYSECRETFORJWTTOKENNADARALP"
+  "jwtSECRET": "MYSECRETFORJWTTOKENNADARALP",
+  "githubClientId": "7bbc37b98783043bc6c0",
+  "githubSecret": "07cc43402a4a0f4711e010e3c3a7d9bc2d93b849"
 }
