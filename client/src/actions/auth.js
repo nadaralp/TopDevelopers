@@ -3,7 +3,10 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOG_OUT
 } from './types';
 import { setAlert } from './alert';
 import setAuthToken from '../utils/setAuthToken';
@@ -43,6 +46,8 @@ export const register = ({ name, email, password }) => async dispatch => {
       type: REGISTER_SUCCESS,
       payload: res.data
     });
+
+    dispatch(loadUser());
   } catch (err) {
     console.log(err.response);
     const errors = err.response.data.errors;
@@ -56,4 +61,45 @@ export const register = ({ name, email, password }) => async dispatch => {
       });
     }
   }
+};
+
+// Log in user
+export const login = (email, password) => async dispatch => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  const body = JSON.stringify({ email, password });
+
+  try {
+    const res = await axios.post('/api/auth', body, config);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: res.data
+    });
+
+    dispatch(loadUser());
+  } catch (err) {
+    console.log(err.response);
+    const errors = err.response.data.errors;
+    if (errors && errors.constructor.name === 'Array') {
+      errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+    } else if (errors && errors.constructor.name === 'Object') {
+      dispatch(setAlert(errors.msg, 'danger'));
+    } else {
+      dispatch({
+        type: LOGIN_FAIL
+      });
+    }
+  }
+};
+
+// Log out /clear profile
+export const logout = () => dispatch => {
+  dispatch({
+    type: LOG_OUT
+  });
 };
