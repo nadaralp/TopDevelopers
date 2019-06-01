@@ -8,7 +8,7 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 
 // @route   GET api/auth
-// @desc    Test route
+// @desc    Query JWT route on redux
 // @access  Private
 router.get("/", auth, async (req, res) => {
   try {
