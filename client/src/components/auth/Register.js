@@ -29,9 +29,9 @@ export default () => {
     const { name, email, password, password2 } = formData;
 
     // Building purposes
-    useEffect(() => {
-        console.log(formData);
-    })
+    // useEffect(() => {
+    //     console.log(formData);
+    // })
 
     return (
         <Fragment>
