@@ -2,9 +2,10 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
     REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, AUTH_SUCCESS, LOGIN_SUCCESS,
-    LOGIN_FAIL
+    LOGIN_FAIL, LOGOUT
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
+
 
 //REGISTER USER
 export const register = ({ name, email, password }) => async dispatch => {
@@ -85,4 +86,12 @@ export const login = (email, password) => async dispatch => {
             type: LOGIN_FAIL
         })
     }
+}
+
+// Logout / clear profiles
+export const logout = () => dispatch => {
+    dispatch({
+        type: LOGOUT
+    });
+    dispatch(setAlert("You have been logged out", "light"))
 }
