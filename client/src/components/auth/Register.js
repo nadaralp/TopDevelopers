@@ -1,12 +1,12 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types'
 
 
-const Register = ({ setAlert, register }) => {
+const Register = ({ setAlert, register, isAuth }) => {
 
     const [formData, updateFormData] = useState({
         name: "",
@@ -39,6 +39,9 @@ const Register = ({ setAlert, register }) => {
     // useEffect(() => {
     //     console.log(formData);
     // })
+
+    // Redirect to dashboard if authenticated
+    if (isAuth) { return <Redirect to="/dashboard" /> }
 
     return (
         <Fragment>
@@ -84,10 +87,15 @@ const Register = ({ setAlert, register }) => {
 
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
-    register: PropTypes.func.isRequired
+    register: PropTypes.func.isRequired,
+    isAuth: PropTypes.bool.isRequired
 }
 
-export default connect(null, {
+const mapStateToProps = state => ({
+    isAuth: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, {
     setAlert,
     register
 })(Register);
