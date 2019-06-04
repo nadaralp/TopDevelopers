@@ -20,3 +20,35 @@ export const getProfile = () => async dispatch => {
         })
     }
 };
+
+// Create or update profile
+export const createProfile = (formData, history, edit = false) => async dispatch => {
+    try {
+        const config = {
+            headers: {
+                "Content-Type": "application/json"
+            }
+        };
+
+        const res = await axios.post('http://localhost:5000/api/profile', JSON.stringify(formData), config);
+        dispatch({
+            type: GET_PROFILE,
+            payload: res.data
+        })
+        dispatch(setAlert(edit ? 'Profile updated' : 'Profile has been created', 'light'));
+
+        if (!edit) {
+            history.push('/dashboard');
+        }
+    } catch (err) {
+        console.log(err.response.data.errors);
+        err.response.data.errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')));
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        })
+    }
+}
