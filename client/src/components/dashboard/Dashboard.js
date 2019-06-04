@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getProfile } from '../../actions/profile';
 import Spinner from '../layout/Spinner';
+import DashboardActions from './DashboardActions';
 
 function Dashboard({ getProfile, auth: { user }, profile: { profile, loading } }) {
 
@@ -12,16 +13,23 @@ function Dashboard({ getProfile, auth: { user }, profile: { profile, loading } }
     }, [])
 
     return (
-        loading && profile === null ? <Spinner /> : <Fragment>
-            <h1 className="large text-primary">Dashboard</h1>
-            <p className="lead"><i className="fas fa-user"></i>{'  '}Welcome {user && user.name} </p>
-            {
-                profile !== null ? <Fragment>has</Fragment> : <Fragment>
-                    <p className="">You haven't set up a profile yet, please add some info</p>
-                    <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
-                </Fragment>
-            }
-        </Fragment>
+        loading && profile === null ? <Spinner /> :
+            <Fragment>
+                <h1 className="large text-primary">Dashboard</h1>
+                <p className="lead"><i className="fas fa-user"></i>{'  '}Welcome {user && user.name} </p>
+                {
+                    profile !== null
+                        ?
+                        <Fragment>
+                            <DashboardActions />
+                        </Fragment>
+                        :
+                        <Fragment>
+                            <p className="">You haven't set up a profile yet, please add some info</p>
+                            <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
+                        </Fragment>
+                }
+            </Fragment>
     )
 }
 
