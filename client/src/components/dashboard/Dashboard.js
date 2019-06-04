@@ -18,7 +18,7 @@ function Dashboard({ getProfile, auth: { user }, profile: { profile, loading } }
             {
                 profile !== null ? <Fragment>has</Fragment> : <Fragment>
                     <p className="">You haven't set up a profile yet, please add some info</p>
-                    <Link to="/profile" className="btn btn-primary my-1">Create Profile</Link>
+                    <Link to="/create-profile" className="btn btn-primary my-1">Create Profile</Link>
                 </Fragment>
             }
         </Fragment>
