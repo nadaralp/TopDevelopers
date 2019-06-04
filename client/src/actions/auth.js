@@ -2,7 +2,7 @@ import axios from 'axios';
 import { setAlert } from './alert';
 import {
     REGISTER_SUCCESS, REGISTER_FAIL, AUTH_ERROR, AUTH_SUCCESS, LOGIN_SUCCESS,
-    LOGIN_FAIL, LOGOUT
+    LOGIN_FAIL, LOGOUT, CLEAR_PROFILE
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
@@ -77,9 +77,12 @@ export const login = (email, password) => async dispatch => {
         const errors = err.response.data.errors;
 
         if (errors) {
-            console.log(errors);
+            // console.log(errors);
             if (Array.isArray(errors)) {
                 errors.forEach((err) => dispatch(setAlert(err.msg, 'danger')))
+            }
+            if (errors.__proto__ === {}.__proto__) {
+                dispatch(setAlert(errors.msg, 'danger'))
             }
         }
         dispatch({
@@ -93,5 +96,8 @@ export const logout = () => dispatch => {
     dispatch({
         type: LOGOUT
     });
+    dispatch({
+        type: CLEAR_PROFILE
+    })
     dispatch(setAlert("You have been logged out", "light"))
 }
