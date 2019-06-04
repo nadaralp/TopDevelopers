@@ -50,7 +50,7 @@ const EditProfile = ({ history, createProfile, getProfile, profile: { profile, l
 
     const onSubmit = e => {
         e.preventDefault();
-        createProfile(formData, history, true)
+        createProfile(formData, history, true);
     };
 
     // Fetch data on mount
@@ -60,11 +60,12 @@ const EditProfile = ({ history, createProfile, getProfile, profile: { profile, l
             setFormData({
                 ...formData,
                 ...profile,
-                ...profile.social
+                ...profile.social,
+                skills: loading || !profile.skills ? '' : profile.skills.join(',')
             });
             console.log(formData);
         }
-    }, [loading]);
+    }, [loading, getProfile]);
 
     if (!loading) {
         return (
