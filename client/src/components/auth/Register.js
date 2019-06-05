@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../../actions/alert';
@@ -32,13 +32,6 @@ const Register = ({ setAlert, register, isAuth }) => {
             register({ name, email, password });
         }
     }
-
-
-
-    // Building purposes
-    // useEffect(() => {
-    //     console.log(formData);
-    // })
 
     // Redirect to dashboard if authenticated
     if (isAuth) { return <Redirect to="/dashboard" /> }

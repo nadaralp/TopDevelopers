@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createProfile, getProfile } from '../../actions/profile';
-import { AUTH_ERROR } from '../../actions/types';
 import Spinner from '../layout/Spinner';
 
 const EditProfile = ({ history, createProfile, getProfile, profile: { profile, loading } }) => {

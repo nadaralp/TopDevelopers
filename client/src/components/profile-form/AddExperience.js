@@ -39,7 +39,6 @@ const AddExperience = ({ addExperience, history, alert }) => {
     }
 
     useEffect(() => {
-        console.log(formData);
         window.scrollTo(0, 0);
     }, [alert])
 

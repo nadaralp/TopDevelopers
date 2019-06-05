@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import { getAllProfiles } from '../../actions/profile';
-import { AUTH_ERROR } from '../../actions/types';
 import ProfileItem from './ProfileItem';
 
 const Profiles = ({ getAllProfiles, profile: { profiles, loading } }) => {
     useEffect(() => {
         getAllProfiles();
-    }, [])
+    }, [getAllProfiles])
     return (
         <Fragment>
             {
-                loading ? <Spinner /> : <Fragment>
+                loading || profiles.length === 0 ? <Spinner /> : <Fragment>
                     <h1 className="large text-primary">Developers</h1>
                     <p className="lead">
                         <i className="fab fa-connectdevelop"></i>{'  '}

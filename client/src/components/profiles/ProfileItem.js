@@ -12,7 +12,7 @@ const ProfileItem = ({ profile: {
     return (
         <Fragment>
             <div className="profile bg-light">
-                <img className="round-img" src={avatar} />
+                <img className="round-img" src={avatar} alt="User profile" />
                 <div>
                     <h2>{name}</h2>
                     <p>{status} {company && <span> at {company}</span>}</p>

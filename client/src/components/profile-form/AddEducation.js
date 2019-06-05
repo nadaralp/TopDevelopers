@@ -39,7 +39,6 @@ const AddEducation = ({ addEducation, history, alert }) => {
     }
 
     useEffect(() => {
-        console.log(formData);
         window.scrollTo(0, 0);
     }, [alert])
 
@@ -60,7 +59,7 @@ const AddEducation = ({ addEducation, history, alert }) => {
                     <input type="text" placeholder="* school" name="school" value={school} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
-                    <input type="text" placeholder="Field of Study" name="fieldofstudy" value={fieldofstudy} onChange={e => onChange(e)} />
+                    <input type="text" placeholder="* Field of Study" name="fieldofstudy" value={fieldofstudy} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
                     <h4>From Date</h4>

@@ -12,7 +12,7 @@ function Dashboard({ deleteAccount, getProfile, auth: { user }, profile: { profi
 
     useEffect(() => {
         getProfile();
-    }, [])
+    }, [getProfile])
 
     return (
         loading && profile === null ? <Spinner /> :
