@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, CLEAR_PROFILE, DELETE_ACCOUNT } from './types';
+import { GET_PROFILE, PROFILE_ERROR, UPDATE_PROFILE, CLEAR_PROFILE, DELETE_ACCOUNT, GET_PROFILES, GET_REPOS } from './types';
 
 // Get the current users profile
 export const getProfile = () => async dispatch => {
@@ -20,6 +20,74 @@ export const getProfile = () => async dispatch => {
         })
     }
 };
+
+// Fetch all profiles
+export const getAllProfiles = () => async dispatch => {
+    dispatch({
+        type: CLEAR_PROFILE
+    })
+    try {
+        const response = await axios.get('http://localhost:5000/api/profile');
+
+        dispatch({
+            type: GET_PROFILES,
+            payload: response.data
+        })
+
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        })
+    }
+};
+
+// Fetch profile by ID
+
+export const getProfileById = (userId) => async dispatch => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/profile/user/${userId}`);
+
+        dispatch({
+            type: GET_PROFILE,
+            payload: response.data
+        })
+
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        })
+    }
+};
+
+// Fetch github REPOS
+export const getRepo = (username) => async dispatch => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/profile/github/${username}`);
+
+        dispatch({
+            type: GET_REPOS,
+            payload: response.data
+        })
+
+    } catch (err) {
+        dispatch({
+            type: PROFILE_ERROR,
+            payload: {
+                msg: err.response.statusText,
+                status: err.response.status
+            }
+        })
+    }
+};
+
 
 // Create or update profile
 export const createProfile = (formData, history, edit = false) => async dispatch => {
