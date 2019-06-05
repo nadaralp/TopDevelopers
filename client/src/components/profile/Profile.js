@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
 import { getProfileById } from '../../actions/profile';
 import ProfileTop from './ProfileTop';
+import ProfileAbout from './ProfileAbout';
 
 const Profile = ({ getProfileById, match, profile: { profile, loading }, auth }) => {
     useEffect(() => {
@@ -24,6 +25,7 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
                     }
                     <div className="profile-grid my-1">
                         <ProfileTop profile={profile} />
+                        <ProfileAbout profile={profile} />
                     </div>
                 </Fragment>
             }
