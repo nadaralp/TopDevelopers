@@ -49,6 +49,7 @@ const EditProfile = ({ history, createProfile, getProfile, profile: { profile, l
 
     const onSubmit = e => {
         e.preventDefault();
+        window.scrollTo(0, 0);
         createProfile(formData, history, true);
     };
 
@@ -144,6 +145,7 @@ const EditProfile = ({ history, createProfile, getProfile, profile: { profile, l
                     </div>
                     {
                         toggled && (<section>
+                            <small># Enter your account name in the social links, all of them optional</small>
                             <div className="form-group social-input">
                                 <i className="fab fa-twitter fa-2x"></i>
                                 <input type="text" placeholder="Twitter URL" name="twitter" value={twitter} onChange={(e) => onChange(e)} />
