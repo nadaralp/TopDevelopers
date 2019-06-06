@@ -198,20 +198,24 @@ router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
     // Pull out comment from the post
     const comment = post.comments.find(
       comment => comment.id === req.params.comment_id
-    ); // Either comment or false
+    ); // Making sure comment exists
     if (!comment) return res.status(404).json({ msg: 'Comment not found' });
 
     // Check if the user is the one that created the comment
     if (comment.user.toString() !== req.user.id) return res.sendStatus(401);
 
     // Find the index of the comment in the array and remvoe it
-    const commentIndex = post.comments
-      .map(comment => comment.user.toString())
-      .indexOf(req.user.id);
-    post.comments.splice(commentIndex, 1);
+    const removeIndex = post.comments
+      .map(comment => comment.id)
+      .indexOf(req.params.comment_id);
+
+    post.comments.splice(removeIndex, 1);
+
+    await post.save();
+
     res.json(post.comments);
-  } catch (error) {
-    console.error(error.msg);
+  } catch (err) {
+    console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
