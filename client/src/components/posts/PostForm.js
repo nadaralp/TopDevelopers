@@ -9,11 +9,11 @@ const PostForm = ({ addPost }) => {
 
     return (
         <Fragment>
-            <div class="post-form">
-                <div class="bg-primary p">
+            <div className="post-form">
+                <div className="bg-primary p">
                     <h3>Say Something...</h3>
                 </div>
-                <form class="form my-1" onSubmit={e => {
+                <form className="form my-1" onSubmit={e => {
                     e.preventDefault();
                     addPost({ text });
                     setText("");
@@ -27,7 +27,7 @@ const PostForm = ({ addPost }) => {
                         value={text}
                         onChange={e => setText(e.target.value)}
                     ></textarea>
-                    <input type="submit" class="btn btn-dark my-1" value="Add Post" />
+                    <input type="submit" className="btn btn-dark my-1" value="Add Post" />
                 </form>
             </div>
         </Fragment>

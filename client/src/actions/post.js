@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { setAlert } from './alert';
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST } from './types';
+import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_POST } from './types';
 
 // Get posts
 export const getPosts = () => async dispatch => {
@@ -96,3 +96,19 @@ export const addPost = (text) => async dispatch => {
         })
     }
 };
+
+// Get post
+export const getPost = (postid) => async dispatch => {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/posts/${postid}`)
+        dispatch({
+            type: GET_POST,
+            payload: response.data
+        });
+    } catch (err) {
+        dispatch({
+            type: POST_ERROR,
+            payload: err.response.statusText
+        })
+    }
+}
