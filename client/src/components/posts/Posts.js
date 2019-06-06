@@ -13,7 +13,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
     return (
         <Fragment>
-            {loading || posts.length === 0 ? <Spinner />
+            {loading ? <Spinner />
                 : <Fragment>
                     <h1 className="large text-primary">Posts</h1>
                     <p className="lead">
