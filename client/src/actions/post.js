@@ -5,7 +5,7 @@ import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST, ADD_POST, GET_POST, A
 // Get posts
 export const getPosts = () => async dispatch => {
     try {
-        const response = await axios.get('http://localhost:5000/api/posts')
+        const response = await axios.get('/api/posts')
         dispatch({
             type: GET_POSTS,
             payload: response.data
@@ -21,7 +21,7 @@ export const getPosts = () => async dispatch => {
 // Add like
 export const addLike = (postid) => async dispatch => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/posts/likes/${postid}`)
+        const response = await axios.put(`/api/posts/likes/${postid}`)
         dispatch({
             type: UPDATE_LIKES,
             payload: {
@@ -40,7 +40,7 @@ export const addLike = (postid) => async dispatch => {
 // Remove like
 export const removeLike = (postid) => async dispatch => {
     try {
-        const response = await axios.put(`http://localhost:5000/api/posts/unlike/${postid}`)
+        const response = await axios.put(`/api/posts/unlike/${postid}`)
         dispatch({
             type: UPDATE_LIKES,
             payload: {
@@ -59,7 +59,7 @@ export const removeLike = (postid) => async dispatch => {
 // Delete post
 export const deletePost = (postid) => async dispatch => {
     try {
-        const response = await axios.delete(`http://localhost:5000/api/posts/${postid}`)
+        const response = await axios.delete(`/api/posts/${postid}`)
         dispatch({
             type: DELETE_POST,
             payload: postid
@@ -82,7 +82,7 @@ export const addPost = (text) => async dispatch => {
                 "Content-Type": "application/json"
             }
         }
-        const response = await axios.post(`http://localhost:5000/api/posts/`, JSON.stringify(text), config)
+        const response = await axios.post(`/api/posts/`, JSON.stringify(text), config)
         dispatch({
             type: ADD_POST,
             payload: response.data
@@ -100,7 +100,7 @@ export const addPost = (text) => async dispatch => {
 // Get post
 export const getPost = (postid) => async dispatch => {
     try {
-        const response = await axios.get(`http://localhost:5000/api/posts/${postid}`)
+        const response = await axios.get(`/api/posts/${postid}`)
         dispatch({
             type: GET_POST,
             payload: response.data
@@ -121,7 +121,7 @@ export const addComment = (postId, formData) => async dispatch => {
                 "Content-Type": "application/json"
             }
         }
-        const response = await axios.post(`http://localhost:5000/api/posts/comment/${postId}`, JSON.stringify(formData), config)
+        const response = await axios.post(`/api/posts/comment/${postId}`, JSON.stringify(formData), config)
         dispatch({
             type: ADD_COMMENT,
             payload: response.data
@@ -139,7 +139,7 @@ export const addComment = (postId, formData) => async dispatch => {
 // Delete comment
 export const deleteComment = (postId, commentId) => async dispatch => {
     try {
-        await axios.delete(`http://localhost:5000/api/posts/comment/${postId}/${commentId}`)
+        await axios.delete(`/api/posts/comment/${postId}/${commentId}`)
         dispatch({
             type: REMOVE_COMMENT,
             payload: commentId
