@@ -8,7 +8,8 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" ",
-    "log": "git log --all --decorate --graph --oneline"
+    "log": "git log --all --decorate --graph --oneline",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Nadar Alpenidze",
   "license": "ISC",
