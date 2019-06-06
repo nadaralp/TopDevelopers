@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Spinner from '../layout/Spinner';
@@ -10,7 +11,7 @@ import ProfileExperience from './ProfileExperience.js';
 import ProfileEducation from './ProfileEducation.js';
 import ProfileGitHub from './ProfileGitHub.js';
 
-const Profile = ({ getProfileById, match, profile: { profile, loading }, auth }) => {
+const Profile = ({ getProfileById, match, profile: { profile, loading }, auth, history }) => {
     useEffect(() => {
         getProfileById(match.params.id)
     }, [getProfileById, match.params.id])
@@ -20,7 +21,7 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
             {loading || profile === null ? <Spinner />
                 :
                 <Fragment>
-                    <Link to="/profiles" className="btn btn-light">Go Back</Link>
+                    <Link to="#" onClick={history.goBack} className="btn btn-light">Go Back</Link>
                     {
                         auth.isAuthenticated && auth.loading === false && auth.user._id === profile.user._id &&
                         <Link className="btn btn-dark" to="/edit-profile">Edit Profile
@@ -66,7 +67,8 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
 Profile.propTypes = {
     getProfileById: PropTypes.func.isRequired,
     profile: PropTypes.object.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
@@ -76,4 +78,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     getProfileById
-})(Profile);
+})(withRouter(Profile));
