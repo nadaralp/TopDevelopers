@@ -23,6 +23,7 @@ const Login = ({ login, isAuth }) => {
 
     const onSubmit = async e => {
         e.preventDefault();
+        window.scrollTo(0, 0);
         login(email, password);
     }
 
