@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
+import pic from './topDevelopers.png';
 
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
@@ -26,8 +27,8 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     return (
         <Fragment>
             <nav className="navbar bg-dark">
-                <h1>
-                    <Link to="/"><i className="fas fa-code"></i> DevConnector</Link>
+                <h1><Link to="/"><img className="nav-img" src={pic} /></Link>
+                    <Link to="/"> <span className="nav-brand-name"></span></Link>
                 </h1>
                 {!loading && (<Fragment>
                     {isAuthenticated ? authLinks : guestLinks}
